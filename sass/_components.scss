@@ -1,0 +1,671 @@
+//////////////////////////////////
+// LOGO
+.logo {
+    height: 3.25rem;
+    margin-left: 3rem;
+}
+
+//////////////////////////////////
+// SEARCH
+.search {
+
+    flex: 0 0 40%;
+    display: flex;
+    /* align elements on the main axis */
+    justify-content: center;
+    /* center element on cross axis */
+    align-items: center;
+
+    @media only screen and (max-width: $breakpoint-large) {
+        font-size: 50%;
+    }
+
+    @media only screen and (max-width: $breakpoint-smallest) {
+        order: 1;
+        flex: 0 0 100%;
+        background-color: var(--color-grey-light-2);
+    }
+
+    &__input {
+        /* we have to specify family and size 
+        because they're not inherited from the parent container
+        automatically */
+        font-family: inherit;
+        font-size: inherit;
+        color:  inherit;
+        padding: .7rem 2rem;
+        background-color: var(--color-grey-light-2);
+        border: none;
+        border-radius: 100px;
+        width: 90%;
+        transition: all .2s;
+        /* to put the button over the input element */
+        margin-right: -3.25rem;
+
+        &:focus {
+            outline: none;
+            width: 100%;
+            background-color: var(--color-grey-light-3);
+        }
+
+        &::placeholder {
+            font-weight: 100;
+            color: var(--color-grey-dark-3);
+        }
+    }
+
+    /* when input is focused also the button changes it's color */ 
+    &__input:focus + &__button {
+        background-color: var(--color-grey-light-3);
+    }
+
+    &__button {
+        border: none;
+        background-color: var(--color-grey-light-2);
+
+        &:focus {
+            outline: none;
+        }
+
+        &:active {
+            /* to move the icon a little bit down when clicked */
+            transform: translateY(2px);
+        }
+
+    }
+
+    &__icon {
+        height: 2rem;
+        width: 2rem;
+        /* changes the color of the icon */
+        fill: var(--color-grey-dark-3);
+    }
+}
+
+//////////////////////////////////
+// USER NAV
+
+.user-nav {
+
+    align-self: stretch;
+    display: flex;
+    /* to position the content inside of the flex-box */
+    justify-content: space-between;
+    /* center element on cross axis */
+    align-items: center;
+
+    & > * {
+        padding: 0 2rem;
+        cursor: pointer;
+        height: 100%;
+        display: flex;
+        /* center element on cross axis */
+        align-items: center;
+    }
+
+    & > *:hover {
+        background-color: var(--color-grey-light-2);
+    }
+
+    &__icon-box {
+        position: relative;
+    }
+
+    &__icon {
+        height: 2.25rem;
+        width: 2.25rem;
+        fill: var(--color-grey-dark-2);
+    }
+
+    &__notification {
+        font-size: .8rem;
+        height: 1.75rem;
+        width: 1.75rem;
+        border-radius: 50%;
+        background-color: var(--color-primary    );
+        color: white;
+        position: absolute;
+        top: 1.5rem;
+        right: 1.1rem;
+
+
+        display: flex;
+        /* to position the content inside of the flex-box */
+        justify-content: center;
+        /* center element on cross axis */
+        align-items: center;
+    }
+
+    &__user-photo {
+        height: 3.75rem;
+        border-radius: 50%;
+        margin-right: 1rem;
+
+    }
+}
+
+//////////////////////////////////
+// SIDE NAVIGATION
+
+.side-nav {
+
+    font-size: 1.4rem; 
+    list-style: none;
+    margin-top: 3.5rem;
+
+    &__item {
+        position: relative;
+
+        &:not(:last-child) {
+            margin-bottom: .5rem;
+        }
+
+        @media only screen and(max-width: $breakpoint-medium) {
+            flex: 1;
+            margin: 0;
+        }
+    }
+
+    @media only screen and(max-width: $breakpoint-medium) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0;
+    }
+
+    /* animation on sidebar menu - start */
+    &__item:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 3px;
+        background-color: var(--color-primary);
+        transform: scaleY(0);
+        transform-origin: center;
+                                /* time - how - delay */
+        transition: transform .2s,
+                     width .4s cubic-bezier(1,0,0,1) .2s,
+                     background-color .1s;
+    }
+
+    &__item:hover::before,
+    &__item--active::before {
+        transform: scaleY(1);
+        width: 100%;
+    }
+
+    &__item:active::before {
+        background-color: var(--color-primary-light);
+    }
+    /* animation on sidebar menu - end */
+
+    &__link:link,
+    &__link:visited {
+        color: var(--color-grey-light-1);
+        text-decoration: none;
+        text-transform: uppercase;
+        display: block;
+        padding: 1.5rem 3rem;  
+        /* to be on top of item:before 
+        z-index works only if the position is specified */
+        position: relative;
+        z-index: 10; 
+        display: flex;
+        align-items: center;
+
+        @media only screen and(max-width: $breakpoint-medium) {
+            justify-content: center;
+        }
+
+        @media only screen and(max-width: $breakpoint-small) {
+            flex-direction: column;
+            padding: 1.5rem;
+        }
+    }
+
+    &__icon {
+        height: 1.75rem;
+        width: 1.75rem;
+        margin-right: 2rem;
+        /* color of parent element */
+        fill: currentColor;
+
+        @media only screen and(max-width: $breakpoint-small) {
+            height: 1.5rem;
+            width: 1.5rem;
+            margin: 0;
+            margin-bottom: .7rem;
+        }
+    }
+
+}
+
+//////////////////////////////////
+// LEGAL TEXT
+
+.legal {
+    color: var(--color-grey-light-4);
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 2.5rem;
+
+    @media only screen and(max-width: $breakpoint-medium) {
+        display: none;  
+    }
+
+}
+
+//////////////////////////////////
+// GALLERY
+
+.gallery {
+
+    display: flex;
+
+    &__photo {
+        width:100%;
+        /* img shuld be always block or inline-block
+        if we want to avoid white spaces */
+        display: block;
+    }
+}
+
+//////////////////////////////////
+// HOTEL OVERVIEW
+
+.overview {
+
+    border-bottom: var(--line);
+    display: flex;
+    align-items: center;
+    
+    &__heading {
+        font-size: 2.25rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 1.5rem 3rem;
+
+        @media only screen and(max-width: $breakpoint-small) {
+            font-size: 1.8rem;
+            padding: 1.25rem 2rem;
+        }
+
+    }
+
+    &__stars {
+        /* IMPORTANT TRICK */
+        /* to create custom space between flex items
+        used in combination with
+        display: flex;
+        align-items: center;*/
+        margin-right: auto;
+        display: flex;
+    }
+
+    &__icon-star,
+    &__icon-location {
+        width: 1.75rem;
+        height: 1.75rem;
+        fill: var(--color-primary);
+    }
+
+    &__icon-location {
+        margin-right: .5rem
+    }
+
+    &__location {
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+    }
+
+    &__rating {
+        
+        background-color: var(--color-primary);
+        margin-left: 3rem;
+        color: white;
+        padding: 0 2.25rem;
+        align-self: stretch;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        @media only screen and(max-width: $breakpoint-small) {
+            padding: 0rem 1.5rem;
+        }
+
+        &-count {
+            font-size: .8rem;
+            text-transform: uppercase;
+
+            @media only screen and(max-width: $breakpoint-small) {
+                font-size: .8rem;
+            }
+        }
+
+        &-average {
+            font-size: 2.25rem;
+            font-weight: 300;
+            margin-bottom: -3px;
+
+            @media only screen and(max-width: $breakpoint-small) {
+                font-size: 1.8rem;
+            }
+        }
+    }
+}
+
+//////////////////////////////////
+// BTN INLINE
+
+.btn-inline {
+    border: none;
+    color: var(--color-primary);
+    font-size: inherit;
+    /* saame colo of the text */
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+    background-color: transparent;
+    display: inline-block;
+    cursor: pointer;
+    transition: all .2s;
+
+    & span {
+        margin-left: 3px;
+        transition: margin-left .2s;
+    }
+
+    &:active {
+        outline: none;
+    }
+
+    &:hover {
+        color: var(--color-grey-dark-1);
+                
+        span {
+            margin-left: 8px;
+        }
+    }
+
+    &:focus {
+        outline: none;
+        animation: pulsate 1s infinite;
+    }
+ }
+
+ @keyframes pulsate {
+
+    0% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 1rem 4rem rgba(0,0,0,.25);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+}
+
+    .user-reviews {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+//////////////////////////////////
+// PARAGRAPH
+.paragraph:not(:last-of-type) {
+    margin-bottom: 2rem;
+}
+
+
+//////////////////////////////////
+// LIST
+.list{
+    list-style: none;
+    margin: 3rem 0;
+    padding: 3rem 0;
+    border-top: var(--line);
+    border-bottom: var(--line);
+
+    /* to make a list in 2 different columns */
+    display: flex;
+    flex-wrap: wrap;
+
+    &__item {
+        /* to make a list in 2 different columns */
+        flex: 0 0 50%;
+        margin-bottom: .7rem;
+    }
+
+    &__item:before {
+        /* we always need the content */
+        content: "";
+        display: inline-block;
+        height: 1rem;
+        width: 1rem;
+        margin-right: .7rem;
+
+        // OLDER BROWSERS
+        background-image: url(../img/chevron-thin-right.svg);
+        background-size: cover;
+
+        // NEWER BROWSERS - masks
+        @supports (-webkit-mask-image: url() or  (mask-image: url())) {
+            background-color: var(--color-primary);
+            -webkit-mask-image: url(../img/chevron-thin-right.svg);
+            -webkit-mask-size: cover;
+            mask-image: url(../img/chevron-thin-right.svg);
+            mask-size: cover;
+            /* this was set in older browsers but we don't need it here */
+            background-image: none;
+        }
+    }
+
+}
+
+//////////////////////////////////
+// RECOMMEND
+
+.recommend {
+    font-size: 1.3rem;
+    color: var(--color-grey-dark-3);
+
+    display: flex;
+    align-items: center;
+
+    &__count {
+        /* IMPORTANT TRICK */
+        /* to create custom space between flex items
+        used in combination with
+        display: flex;
+        align-items: center;*/
+        margin-right: auto;
+    }
+
+    &__friends {
+        display: flex;
+    }
+
+    &__photo {
+        /* box-sizing in inherited from base = border-box
+        in this case we want content-box */
+        box-sizing: content-box;
+        height: 4rem;
+        width: 4rem;
+        border-radius: 50%;
+        border: 3px solid white;
+
+        &:not(:last-child) {
+            margin-right: -2rem;
+        }
+    }
+}
+
+//////////////////////////////////
+// REVIEWS
+
+.review {
+
+    background-color: white;
+    box-shadow: var(--shadow-light);
+    margin-bottom: 3.5rem;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+
+    @media only screen and(max-width: $breakpoint-medium) {
+        padding: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    @media only screen and(max-width: $breakpoint-small) {
+        flex: 1;
+    }
+
+    &__text {
+        display: inline-block;
+        margin-bottom: 2rem;
+        z-index: 10;
+        /* zindex works only with declared position*/
+        position: relative;
+    }
+
+    &__user {
+        display: flex;
+        align-items: center;
+    }
+
+    &__photo {
+        height: 4.5rem;
+        width: 4.5rem;
+        border-radius: 50%;
+        margin-right: 1.4rem;
+    }
+
+    &__user-box {
+        margin-right: auto;
+    }
+
+    &__user-name {
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-bottom: .4rem;
+    }
+
+    &__user-date {
+        font-size: 1rem;
+        font-weight: 100;
+        color: var(--color-grey-dark-3);
+    }
+
+    &__rating {
+        font-size: 2.2rem;
+        font-weight: 300;
+        color: var(--color-primary);
+    }
+
+    &::before {
+        content: "\201c";
+        position: absolute;
+        top: -2.75rem;
+        left: -1rem;
+        line-height: 1;
+        font-size: 20rem;
+        color: var(--color-grey-light-2);
+        font-family: sans-serif;
+        z-index: 1;
+    }
+}
+
+//////////////////////////////////
+// CALL TO ACTION
+.cta {
+    padding: 3.5rem 0;
+    text-align: center;
+
+    @media only screen and(max-width: $breakpoint-medium) {
+        padding: 2.5rem 0;
+    }
+
+    &__book-now {
+        text-transform: uppercase;
+        font-size: 2rem;
+        font-weight: 300;
+        margin-bottom: 2.5rem;
+    }
+}
+
+
+//////////////////////////////////
+// BUTTON
+.btn {
+    font-size: 1.5rem;
+    font-weight: 300;
+    border: none;
+    text-transform: uppercase;
+    display: inline-block;
+    color: white;
+    border-radius: 10rem;
+    background-image: linear-gradient(to right, var(--color-primary-light), var(--color-primary-dark));
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all .2s;
+
+    &__visible {
+        display: inline-block;
+        padding: 2rem 7.5rem;
+        height: 100%;
+        width: 100%;
+        transition: all .2s;
+    }
+
+    &__invisible {
+        display: inline-block;
+        padding: 2rem 0;
+        position:absolute;
+        left:0;
+        top: -100%;
+        height: 100%;
+        width: 100%;
+        transition: all .2s;
+    }
+
+    &:active,
+    &:focus,
+    &:hover {
+        outline: none;
+    }
+
+    &:hover {
+        background-image: linear-gradient(to left, var(--color-primary-light), var(--color-primary-dark));
+    }
+
+    &:active {
+        transform: translateY(.5rem)
+    }
+
+    &:hover &__visible {
+         transform: translatey(100%);
+    }
+
+    &:hover &__invisible {
+         top: 0;
+
+    }
+    
+}
